@@ -3,7 +3,7 @@
 A full-stack ecommerce application built with:
 - **Backend:** ASP.NET Core 8 Web API
 - **Frontend:** Angular 20
-- **Database:** MS SQL 
+- **Database:** Microsoft SQL Server 2022
 - **Cache:** Redis
 - **Containerized:** Docker & Docker Compose
 - **CI/CD:** GitHub Actions
