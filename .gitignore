@@ -26,3 +26,24 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+// recommended ignores 
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+*.log
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+
+# Others
+.env
+.vscode/
+.idea/
+
