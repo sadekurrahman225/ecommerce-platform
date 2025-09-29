@@ -24,3 +24,20 @@ dotnet run
 ```bash
 docker-compose -f docker-compose.dev.yml up --build
 
+#If you’re editing backend C# code → rebuild container:
+docker-compose -f docker-compose.dev.yml up --build api
+
+#If you’re editing Angular code → rebuild frontend container:
+docker-compose -f docker-compose.dev.yml up --build frontend
+
+#If you just want to start everything:
+docker-compose -f docker-compose.dev.yml up -d
+
+#Dev 2 for hot-reload
+docker-compose -f docker-compose.dev_hot_reload.yml up
+
+#Prod for optimized start
+docker-compose -f docker-compose.prod.yml up --build -d
+
+
+

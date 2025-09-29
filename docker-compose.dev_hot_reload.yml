@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  api:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: ecommerce-api-dev
+    working_dir: /src
+    volumes:
+      - ./backend/Ecom.Api:/src
+    command: dotnet watch run --urls http://0.0.0.0:5000
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=EcommerceDb;User Id=sa;Password=Your_strong_Passw0rd!;TrustServerCertificate=True
+    depends_on:
+      - mssql
+      - redis
+
+  frontend:
+    image: node:20
+    container_name: ecommerce-frontend-dev
+    working_dir: /app
+    volumes:
+      - ./frontend/storefront:/app
+      - /app/node_modules
+    command: npm run start -- --host 0.0.0.0 --poll 2000
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ecommerce-mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_strong_Passw0rd!
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  redis:
+    image: redis:7-alpine
+    container_name: ecommerce-redis
+    ports:
+      - "6379:6379"
+
+  adminer:
+    image: adminer:latest
+    container_name: ecommerce-adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mssql
+
+volumes:
+  mssql_data:
