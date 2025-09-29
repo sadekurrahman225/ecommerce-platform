@@ -19,3 +19,8 @@ A full-stack ecommerce application built with:
 ```bash
 cd backend/Ecom.Api
 dotnet run
+
+## Run with Docker
+```bash
+docker-compose -f docker-compose.dev.yml up --build
+
